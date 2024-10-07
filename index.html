@@ -1,0 +1,4551 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- https://fontawesome.com/search?q=chess%20&o=r&m=free -->
+    <title>Chess</title>
+    <meta charset="UTF-8" />
+    <style>
+      .chess-board {
+        border-spacing: 0;
+        border-collapse: collapse;
+        position: absolute;
+        right: 9%;
+        top: 5.4%;
+      }
+
+      .chess-board th {
+        padding: 0.3em;
+      }
+      .chess-board td {
+        border: 1px solid transparent;
+        font-size: 27px;
+
+        width: 2.7em;
+        height: 2.7em;
+      }
+      td i {
+        margin-left: 30px;
+
+        width: 50%;
+      }
+      .chess-board .light {
+        background: #eee;
+      }
+      .chess-board .dark {
+        background: rgb(194, 189, 189);
+     
+      }
+
+      .chess-board-2,
+      .chess-board-3,
+      .chess-board-4,
+      .chess-board-5,
+      .chess-board-6,
+      .chess-board-7,
+      .chess-board-8,
+      .chess-board-9,
+      .chess-board-10,
+      .chess-board-11,
+      .chess-board-12,
+      .chess-board-13,
+      .chess-board-14,
+      .chess-board-15,
+      .chess-board-16,
+      .chess-board-17,
+      .chess-board-18,
+      .chess-board-19,
+      .chess-board-20,
+      .chess-board-21,
+      .chess-board-22,
+      .chess-board-23,
+      .chess-board-24,
+      .chess-board-25,
+      .chess-board-26,
+      .chess-board-27,
+      .chess-board-28,
+      .chess-board-29,
+      .chess-board-30,
+      .chess-board-31,
+      .chess-board-32,
+      .chess-board-33 {
+        border-spacing: 0;
+        border-collapse: collapse;
+        position: absolute;
+        opacity: 1;
+        left: 8.9%;
+        top: 23.4%;
+      }
+
+      .chess-board-2 td,
+      .chess-board-3 td,
+      .chess-board-4 td,
+      .chess-board-5 td,
+      .chess-board-6 td,
+      .chess-board-7 td,
+      .chess-board-8 td,
+      .chess-board-9 td,
+      .chess-board-10 td,
+      .chess-board-11 td,
+      .chess-board-12 td,
+      .chess-board-13 td,
+      .chess-board-14 td,
+      .chess-board-15 td,
+      .chess-board-16 td,
+      .chess-board-17 td,
+      .chess-board-18 td,
+      .chess-board-19 td,
+      .chess-board-20 td,
+      .chess-board-21 td,
+      .chess-board-22 td,
+      .chess-board-23 td,
+      .chess-board-24 td,
+      .chess-board-25 td,
+      .chess-board-26 td,
+      .chess-board-27 td,
+      .chess-board-28 td,
+      .chess-board-29 td,
+      .chess-board-30 td,
+      .chess-board-31 td,
+      .chess-board-32 td,
+      .chess-board-33 td {
+        border: 1px solid transparent;
+
+        width: 3.6em;
+        height: 3.6em;
+      }
+
+      .chess-board-2 .light,
+      .chess-board-3 .light,
+      .chess-board-4 .light,
+      .chess-board-5 .light,
+      .chess-board-6 .light,
+      .chess-board-7 .light,
+      .chess-board-8 .light,
+      .chess-board-9 .light,
+      .chess-board-10 .light,
+      .chess-board-11 .light,
+      .chess-board-12 .light,
+      .chess-board-13 .light,
+      .chess-board-14 .light,
+      .chess-board-15 .light,
+      .chess-board-16 .light,
+      .chess-board-17 .light,
+      .chess-board-18 .light,
+      .chess-board-19 .light,
+      .chess-board-20 .light,
+      .chess-board-21 .light,
+      .chess-board-22 .light,
+      .chess-board-23 .light,
+      .chess-board-24 .light,
+      .chess-board-25 .light,
+      .chess-board-26 .light,
+      .chess-board-27 .light,
+      .chess-board-28 .light,
+      .chess-board-29 .light,
+      .chess-board-30 .light,
+      .chess-board-31 .light,
+      .chess-board-32 .light,
+      .chess-board-33 .light {
+        background: whitesmoke;
+      }
+
+      .chess-board-2 .dark,
+      .chess-board-3 .dark,
+      .chess-board-4 .dark,
+      .chess-board-5 .dark,
+      .chess-board-6 .dark,
+      .chess-board-7 .dark,
+      .chess-board-8 .dark,
+      .chess-board-9 .dark,
+      .chess-board-10 .dark,
+      .chess-board-11 .dark,
+      .chess-board-12 .dark,
+      .chess-board-13 .dark,
+      .chess-board-14 .dark,
+      .chess-board-15 .dark,
+      .chess-board-16 .dark,
+      .chess-board-17 .dark,
+      .chess-board-18 .dark,
+      .chess-board-19 .dark,
+      .chess-board-20 .dark,
+      .chess-board-21 .dark,
+      .chess-board-22 .dark,
+      .chess-board-23 .dark,
+      .chess-board-24 .dark,
+      .chess-board-25 .dark,
+      .chess-board-26 .dark,
+      .chess-board-27 .dark,
+      .chess-board-28 .dark,
+      .chess-board-29 .dark,
+      .chess-board-30 .dark,
+      .chess-board-31 .dark,
+      .chess-board-32 .dark,
+      .chess-board-33 .dark {
+        background: silver;
+      }
+
+      .selecta {
+        transition: all 300ms;
+        transform: scale(1.01);
+        color: red;
+      }
+
+      /* .chess-board-2 {
+        box-shadow: green 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+      }
+
+      .chess-board-3 {
+        box-shadow: rebeccapurple 0px 15px 25px,
+          rgba(0, 0, 0, 0.05) 0px 5px 10px;
+      }
+
+      .chess-board-4 {
+        box-shadow: red 0px 12px 21px, rgba(0, 0, 0, 0.05) 0px 3px 9px;
+      }
+
+      .chess-board-5 {
+        box-shadow: yellow 0px 12px 21px, rgba(0, 0, 0, 0.05) 0px 3px 9px;
+      }
+
+      .chess-board-6 {
+        box-shadow: pink 0px 12px 21px, rgba(0, 0, 0, 0.05) 0px 3px 9px;
+      }
+
+      .chess-board-7 {
+        box-shadow: skyblue 0px 12px 21px, rgba(0, 0, 0, 0.05) 0px 3px 9px;
+      }
+
+      .chess-board-8 {
+        box-shadow: maroon 0px 12px 21px, rgba(0, 0, 0, 0.05) 0px 3px 9px;
+      }
+
+      .chess-board-9 {
+        box-shadow: orangered 0px 12px 21px, rgba(0, 0, 0, 0.05) 0px 3px 9px;
+      }
+
+      .chess-board-10 {
+        box-shadow: black 0px 12px 21px, rgba(0, 0, 0, 0.05) 0px 3px 9px;
+      }
+
+      .chess-board-11 {
+        box-shadow: whitesmoke 0px 12px 21px, rgba(0, 0, 0, 0.05) 0px 3px 9px;
+      }
+
+      .chess-board-12 {
+        box-shadow: black 0px 12px 21px, rgba(0, 0, 0, 0.05) 0px 3px 9px;
+      }
+
+      .chess-board-13 {
+        box-shadow: whitesmoke 0px 12px 21px, rgba(0, 0, 0, 0.05) 0px 3px 9px;
+      }
+
+      .chess-board-14 {
+        box-shadow: black 0px 12px 21px, rgba(0, 0, 0, 0.05) 0px 3px 9px;
+      }
+
+      .chess-board-15 {
+        box-shadow: whitesmoke 0px 12px 21px, rgba(0, 0, 0, 0.05) 0px 3px 9px;
+      }
+
+      .chess-board-16 {
+        box-shadow: black 0px 12px 21px, rgba(0, 0, 0, 0.05) 0px 3px 9px;
+      }
+
+      .chess-board-17 {
+        box-shadow: whitesmoke 0px 12px 21px, rgba(0, 0, 0, 0.05) 0px 3px 9px;
+      }
+      .chess-board-18 {
+        box-shadow: green 0px 12px 21px, green 0px 3px 9px;
+      }
+      .chess-board-19 {
+        box-shadow: red 0px 12px 21px, red 0px 3px 9px;
+      }
+      .chess-board-20 {
+        box-shadow: yellow 0px 12px 21px, yellow 0px 3px 9px;
+      }
+      .chess-board-21 {
+        box-shadow: blue 0px 12px 21px, blue 0px 3px 9px;
+      }
+      .chess-board-22 {
+        box-shadow: purple 0px 12px 21px, purple 0px 3px 9px;
+      }
+      .chess-board-23 {
+        box-shadow: gold 0px 12px 21px, gold 0px 3px 9px;
+      }
+      .chess-board-24 {
+        box-shadow: yellowgreen 0px 12px 21px, yellowgreen 0px 3px 9px;
+      }
+      .chess-board-25 {
+        box-shadow: pink 0px 12px 21px, red 0px 3px 9px;
+      }
+      .chess-board-26 {
+        box-shadow: black 0px 12px 21px, black 0px 3px 9px;
+      }
+      .chess-board-27 {
+        box-shadow: white 0px 12px 21px, white 0px 3px 9px;
+      }
+      .chess-board-28 {
+        box-shadow: black 0px 12px 21px, black 0px 3px 9px;
+      }
+      .chess-board-29 {
+        box-shadow: white 0px 12px 21px, white 0px 3px 9px;
+      }
+      .chess-board-30 {
+        box-shadow: black 0px 12px 21px, black 0px 3px 9px;
+      }
+      .chess-board-31 {
+        box-shadow: white 0px 12px 21px, white 0px 3px 9px;
+      }
+      .chess-board-32 {
+        box-shadow: black 0px 12px 21px, black 0px 3px 9px;
+      }
+      .chess-board-33 {
+        box-shadow: white 0px 12px 21px, white 0px 3px 9px;
+      } */
+
+      .aniblue {
+        animation: myAnim 3s linear infinite normal forwards;
+      }
+      .anired {
+        animation: myAnim2 3s linear infinite normal forwards;
+      }
+      @keyframes myAnim {
+        0% {
+          border: 1px solid rgb(33, 84, 239);
+          border-radius: 12px;
+          box-shadow: rgb(94, 138, 242) 0px 0px 12px 3px;
+          transform: scale(1);
+        }
+
+        50% {
+          border: 1px solid rgb(33, 84, 239);
+          border-radius: 12px;
+          box-shadow: rgb(94, 138, 242) 0px 0px 12px 3px;
+          transform: scale(1.03);
+        }
+
+        100% {
+          border: 1px solid rgb(33, 84, 239);
+          border-radius: 12px;
+          box-shadow: rgb(94, 138, 242) 0px 0px 12px 3px;
+          transform: scale(1);
+        }
+      }
+      @keyframes myAnim2 {
+        0% {
+          border: 1px solid rgb(226, 72, 72);
+          border-radius: 12px;
+          box-shadow: rgb(243, 90, 90) 0px 0px 12px 3px;
+          transform: scale(1);
+        }
+
+        50% {
+          border: 1px solid rgb(226, 72, 72);
+          border-radius: 12px;
+          box-shadow: rgb(243, 90, 90) 0px 0px 12px 3px;
+          transform: scale(1.03);
+        }
+
+        100% {
+          border: 1px solid rgb(226, 72, 72);
+          border-radius: 12px;
+          box-shadow: rgb(243, 90, 90) 0px 0px 12px 3px;
+          transform: scale(1);
+        }
+      }
+
+      .kookri {
+        animation: kookri 3s linear infinite normal forwards;
+      }
+      @keyframes kookri {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        10%,
+        30%,
+        50%,
+        70% {
+          transform: translateY(-8px);
+        }
+
+        20%,
+        40%,
+        60% {
+          transform: translateY(8px);
+        }
+
+        80% {
+          transform: translateY(6.4px);
+        }
+
+        90% {
+          transform: translateY(-6.4px);
+        }
+      }
+
+      .player1 {
+        position: absolute;
+        left: 46.46%;
+        bottom: 7%;
+        height: 36px;
+        width: 36px;
+        color: white;
+        font-size: larger;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        /* background-image: url('https://cdn-icons-png.flaticon.com/512/1246/1246314.png'); */
+        background-image: url("https://cdn-icons-png.flaticon.com/256/11879/11879708.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border: 3px solid rgba(0, 0, 255, 0.451);
+        background-color: whitesmoke;
+      }
+      .player2 {
+        position: absolute;
+        left: 93.3%;
+        top: 7%;
+        height: 36px;
+        width: 36px;
+        background-color: whitesmoke;
+        color: white;
+        font-size: larger;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 3px solid red;
+        border-radius: 50%;
+        background-image: url("https://getdrawings.com/free-icon/login-icon-56.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .player11 {
+        position: absolute;
+        left: 43.5%;
+        bottom: 3%;
+        height: 21px;
+        width: 100px;
+        color: blue;
+        font-size: medium;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+        padding: 3px 12px;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        text-transform: capitalize;
+        box-shadow: rgba(140, 140, 236, 0.25) 0px 13px 27px -5px,
+          rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        overflow: hidden;
+        text-align: center;
+      }
+      .player22 {
+        position: absolute;
+        left: 90.5%;
+        top: 2.7%;
+        height: 21px;
+        width: 100px;
+        padding: 3px 12px;
+        color: red;
+        font-size: medium;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 6px;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        text-transform: capitalize;
+        box-shadow: rgba(231, 128, 128, 0.25) 0px 13px 27px -5px,
+          rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        text-align: center;
+      }
+      .controls {
+        height: 162px;
+        width: 600px;
+        position: absolute;
+        top: 0%;
+        left: 5%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Playwrite DE Grund", cursive;
+      }
+      .controls form {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        gap: 12px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: large;
+
+        flex-wrap: wrap;
+        font-family: "Playwrite DE Grund", cursive;
+      }
+      .controls form input {
+        height: 30px;
+        width: 200px;
+        border: none;
+        outline: none;
+        font-family: "Playwrite DE Grund", cursive;
+        border-radius: 6px;
+        border-bottom: 1px solid black;
+      }
+      .controls2 {
+        height: 162px;
+        width: 600px;
+        position: absolute;
+        top: 0%;
+        left: 5%;
+        background-color: white;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        font-family: "Playwrite DE Grund", cursive;
+      }
+      .controls2 form {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        gap: 12px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: large;
+
+        text-transform: capitalize;
+        flex-wrap: wrap;
+        font-family: "Playwrite DE Grund", cursive;
+      }
+      .controls2 form input {
+        height: 30px;
+        width: 200px;
+        border: none;
+        outline: none;
+        font-family: "Playwrite DE Grund", cursive;
+        border-radius: 6px;
+        border-bottom: 1px solid black;
+      }
+
+      /* CSS */
+      #btn2 {
+        position: absolute;
+        width: 20%;
+        left: 40%;
+      }
+      a {
+        text-decoration: none;
+        outline: none;
+        border: none;
+        display: initial;
+      }
+
+      .button-44 {
+        background: #e62143;
+        border-radius: 11px;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        font-family: Mija, -apple-system, BlinkMacSystemFont, Roboto,
+          "Roboto Slab", "Droid Serif", "Segoe UI", system-ui, Arial, sans-serif;
+        font-size: 1em;
+        font-weight: 700;
+        justify-content: center;
+        line-height: 16.4929px;
+        padding: 0.9em 0.6em;
+        text-align: center;
+        text-decoration: none;
+        text-decoration-skip-ink: auto;
+        text-shadow: rgba(0, 0, 0, 0.3) 1px 1px 1px;
+        text-underline-offset: 1px;
+        transition: all 0.2s ease-in-out;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: 20%;
+        word-break: break-word;
+        border: 0;
+      }
+
+      .button-44:active,
+      .button-44:focus {
+        border-bottom-style: none;
+        border-color: #dadada;
+        box-shadow: rgba(0, 0, 0, 0.3) 0 3px 3px inset;
+        outline: 0;
+      }
+
+      .button-44:hover {
+        border-bottom-style: none;
+        border-color: #dadada;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="controls" id="starting">
+      <form>
+        <label for="name" style="color: blue; font-weight: 600"
+          >Player 1
+          <input
+            type="text"
+            id="name"
+            name="fname"
+            value=""
+            placeholder="Enter your name"
+            required
+          />
+        </label>
+
+        <label for="surname" style="color: red; font-weight: 600"
+          >Player 2
+          <input
+            type="text"
+            id="surname"
+            name="surname"
+            value=""
+            placeholder="Enter your name"
+            required
+          />
+        </label>
+
+        <button class="button-44" role="button" id="btn">Start</button>
+      </form>
+    </div>
+
+    <!-- <div class="form">
+      <form>
+        <label>Player 1</label>
+        <input type="text" placeholder="Enter Your Name" name="p1" required />
+        <label>Player 2</label>
+        <input type="text" placeholder="Enter Your Name" name="p2" required />
+
+        <button class="button-82-pushable" role="button">
+          <span class="button-82-shadow"></span>
+          <span class="button-82-edge"></span>
+          <span class="button-82-front text" id="start"> Start </span>
+        </button>
+      </form>
+    </div> -->
+
+    <!-- <table class="chess-board">
+      <tbody>
+        <tr>
+          <th></th>
+          <th>a</th>
+          <th>b</th>
+          <th>c</th>
+          <th>d</th>
+          <th>e</th>
+          <th>f</th>
+          <th>g</th>
+          <th>h</th>
+        </tr>
+        <tr>
+          <th>8</th>
+          <td class="light">
+            <i class="fa-solid fa-chess-rook" id="arook"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-solid fa-chess-knight" id="knight"></i>
+          </td>
+          <td class="light">
+            <i class="fa-solid fa-chess-bishop" id="bishop"></i>
+          </td>
+          <td class="dark"><i class="fa-solid fa-chess-king" id="king"></i></td>
+          <td class="light">
+            <i class="fa-solid fa-chess-queen" id="queen"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-solid fa-chess-bishop" id="bishop2"></i>
+          </td>
+          <td class="light">
+            <i class="fa-solid fa-chess-knight" id="knight2"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-solid fa-chess-rook" id="arook2"></i>
+          </td>
+        </tr>
+        <tr>
+          <th>7</th>
+          <td class="dark"><i class="fa-solid fa-chess-pawn" id="ap1"></i></td>
+          <td class="light"><i class="fa-solid fa-chess-pawn" id="ap2"></i></td>
+          <td class="dark"><i class="fa-solid fa-chess-pawn" id="ap3"></i></td>
+          <td class="light"><i class="fa-solid fa-chess-pawn" id="ap4"></i></td>
+          <td class="dark"><i class="fa-solid fa-chess-pawn" id="ap5"></i></td>
+          <td class="light"><i class="fa-solid fa-chess-pawn" id="ap6"></i></td>
+          <td class="dark"><i class="fa-solid fa-chess-pawn" id="ap7"></i></td>
+          <td class="light"><i class="fa-solid fa-chess-pawn" id="ap8"></i></td>
+        </tr>
+        <tr>
+          <th>6</th>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+        </tr>
+        <tr>
+          <th>5</th>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+        </tr>
+        <tr>
+          <th>4</th>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+        </tr>
+        <tr>
+          <th>2</th>
+
+          <td class="dark">
+            <i class="fa-regular fa-chess-pawn" id="bp1"></i>
+          </td>
+          <td class="light">
+            <i class="fa-regular fa-chess-pawn" id="bp2"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-regular fa-chess-pawn" id="bp3"></i>
+          </td>
+          <td class="light">
+            <i class="fa-regular fa-chess-pawn" id="bp4"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-regular fa-chess-pawn" id="bp5"></i>
+          </td>
+          <td class="light">
+            <i class="fa-regular fa-chess-pawn" id="bp6"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-regular fa-chess-pawn" id="bp7"></i>
+          </td>
+          <td class="light">
+            <i class="fa-regular fa-chess-pawn" id="bp8"></i>
+          </td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td class="dark">
+            <i class="fa-regular fa-chess-rook" id="brook"></i>
+          </td>
+          <td class="light">
+            <i class="fa-regular fa-chess-knight" id="bknight"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-regular fa-chess-bishop" id="bbishop"></i>
+          </td>
+          <td class="light">
+            <i class="fa-regular fa-chess-king" id="bking"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-regular fa-chess-queen" id="bqueen"></i>
+          </td>
+          <td class="light">
+            <i class="fa-regular fa-chess-bishop" id="bbishop2"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-regular fa-chess-knight" id="bknight2"></i>
+          </td>
+          <td class="light">
+            <i class="fa-regular fa-chess-rook" id="brook2"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table> -->
+
+    <table class="chess-board">
+      <tbody>
+        <tr>
+          <th></th>
+          <th>a</th>
+          <th>b</th>
+          <th>c</th>
+          <th>d</th>
+          <th>e</th>
+          <th>f</th>
+          <th>g</th>
+          <th>h</th>
+        </tr>
+        <tr>
+          <th>8</th>
+          <td class="light">
+            <i class="fa-solid fa-chess-rook" id="arook"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-solid fa-chess-knight" id="knight"></i>
+          </td>
+          <td class="light">
+            <i class="fa-solid fa-chess-bishop" id="bishop"></i>
+          </td>
+          <td class="dark"><i class="fa-solid fa-chess-king" id="king"></i></td>
+          <td class="light">
+            <i class="fa-solid fa-chess-queen" id="queen"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-solid fa-chess-bishop" id="bishop2"></i>
+          </td>
+          <td class="light">
+            <i class="fa-solid fa-chess-knight" id="knight2"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-solid fa-chess-rook" id="arook2"></i>
+          </td>
+        </tr>
+        <tr>
+          <th>7</th>
+          <td class="dark"><i class="fa-solid fa-chess-pawn" id="ap1"></i></td>
+          <td class="light"><i class="fa-solid fa-chess-pawn" id="ap2"></i></td>
+          <td class="dark"><i class="fa-solid fa-chess-pawn" id="ap3"></i></td>
+          <td class="light"><i class="fa-solid fa-chess-pawn" id="ap4"></i></td>
+          <td class="dark"><i class="fa-solid fa-chess-pawn" id="ap5"></i></td>
+          <td class="light"><i class="fa-solid fa-chess-pawn" id="ap6"></i></td>
+          <td class="dark"><i class="fa-solid fa-chess-pawn" id="ap7"></i></td>
+          <td class="light"><i class="fa-solid fa-chess-pawn" id="ap8"></i></td>
+        </tr>
+        <tr>
+          <th>6</th>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+        </tr>
+        <tr>
+          <th>5</th>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+        </tr>
+        <tr>
+          <th>4</th>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+          <td class="dark"></td>
+          <td class="light"></td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td class="light">
+            <i class="fa-solid fa-chess-pawn" id="bp1"></i>
+          </td>
+          <td class="dark"><i class="fa-solid fa-chess-pawn" id="bp2"></i></td>
+          <td class="light"><i class="fa-solid fa-chess-pawn" id="bp3"></i></td>
+          <td class="dark"><i class="fa-solid fa-chess-pawn" id="bp4"></i></td>
+          <td class="light"><i class="fa-solid fa-chess-pawn" id="bp5"></i></td>
+          <td class="dark"><i class="fa-solid fa-chess-pawn" id="bp6"></i></td>
+          <td class="light"><i class="fa-solid fa-chess-pawn" id="bp7"></i></td>
+          <td class="dark"><i class="fa-solid fa-chess-pawn" id="bp8"></i></td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td class="dark">
+            <i class="fa-solid fa-chess-rook" id="brook"></i>
+          </td>
+          <td class="light">
+            <i class="fa-solid fa-chess-knight" id="bknight"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-solid fa-chess-bishop" id="bbishop"></i>
+          </td>
+          <td class="light">
+            <i class="fa-solid fa-chess-king" id="bking"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-solid fa-chess-queen" id="bqueen"></i>
+          </td>
+          <td class="light">
+            <i class="fa-solid fa-chess-bishop" id="bbishop2"></i>
+          </td>
+          <td class="dark">
+            <i class="fa-solid fa-chess-knight" id="bknight2"></i>
+          </td>
+          <td class="light">
+            <i class="fa-solid fa-chess-rook" id="brook2"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-2">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+          <td class="dark cb2"></td>
+          <td class="light cb2"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-3">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+          <td class="dark cb3"></td>
+          <td class="light cb3"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-4">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+          <td class="dark cb4"></td>
+          <td class="light cb4"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-5">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+          <td class="dark cb5"></td>
+          <td class="light cb5"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-6">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+          <td class="dark cb6"></td>
+          <td class="light cb6"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-7">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+          <td class="dark cb7"></td>
+          <td class="light cb7"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-8">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+          <td class="dark cb8"></td>
+          <td class="light cb8"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-9">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+          <td class="dark cb9"></td>
+          <td class="light cb9"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-10">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+          <td class="dark cb10"></td>
+          <td class="light cb10"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-11">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+          <td class="dark cb11"></td>
+          <td class="light cb11"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-12">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+          <td class="dark cb12"></td>
+          <td class="light cb12"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-13">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+          <td class="dark cb13"></td>
+          <td class="light cb13"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-14">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+          <td class="dark cb14"></td>
+          <td class="light cb14"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-15">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+          <td class="dark cb15"></td>
+          <td class="light cb15"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-16">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+          <td class="dark cb16"></td>
+          <td class="light cb16"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-17">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+          <td class="dark cb17"></td>
+          <td class="light cb17"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-18">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+          <td class="dark cb18"></td>
+          <td class="light cb18"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-19">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+          <td class="dark cb19"></td>
+          <td class="light cb19"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-20">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+          <td class="dark cb20"></td>
+          <td class="light cb20"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="chess-board-21">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+          <td class="dark cb21"></td>
+          <td class="light cb21"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="chess-board-22">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+          <td class="dark cb22"></td>
+          <td class="light cb22"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="chess-board-23">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+          <td class="dark cb23"></td>
+          <td class="light cb23"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="chess-board-24">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+          <td class="dark cb24"></td>
+          <td class="light cb24"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="chess-board-25">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+          <td class="dark cb25"></td>
+          <td class="light cb25"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="chess-board-26">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+          <td class="dark cb26"></td>
+          <td class="light cb26"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="chess-board-27">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+          <td class="dark cb27"></td>
+          <td class="light cb27"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="chess-board-28">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+          <td class="dark cb28"></td>
+          <td class="light cb28"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="chess-board-29">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+          <td class="dark cb29"></td>
+          <td class="light cb29"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="chess-board-30">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+          <td class="dark cb30"></td>
+          <td class="light cb30"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="chess-board-31">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+          <td class="dark cb31"></td>
+          <td class="light cb31"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="chess-board-32">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+          <td class="dark cb32"></td>
+          <td class="light cb32"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="chess-board-33">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+          <td class="dark cb33"></td>
+          <td class="light cb33"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      cb = document.getElementsByClassName("chess-board")[0];
+      console.log(cb);
+
+      cb2 = document.getElementsByClassName("chess-board-2")[0];
+      console.log(cb2);
+
+      cb3 = document.getElementsByClassName("chess-board-3")[0];
+      console.log(cb3);
+
+      cb4 = document.getElementsByClassName("chess-board-4")[0];
+      console.log(cb4);
+
+      cb5 = document.getElementsByClassName("chess-board-5")[0];
+      console.log(cb5);
+
+      cb6 = document.getElementsByClassName("chess-board-6")[0];
+      console.log(cb6);
+
+      cb7 = document.getElementsByClassName("chess-board-7")[0];
+      console.log(cb7);
+
+      cb8 = document.getElementsByClassName("chess-board-8")[0];
+      console.log(cb8);
+
+      cb9 = document.getElementsByClassName("chess-board-9")[0];
+      console.log(cb9);
+
+      cb10 = document.getElementsByClassName("chess-board-10")[0];
+      console.log(cb10);
+
+      cb11 = document.getElementsByClassName("chess-board-11")[0];
+      console.log(cb10);
+
+      cb12 = document.getElementsByClassName("chess-board-12")[0];
+      console.log(cb12);
+
+      cb13 = document.getElementsByClassName("chess-board-13")[0];
+      console.log(cb13);
+
+      cb14 = document.getElementsByClassName("chess-board-14")[0];
+      console.log(cb14);
+
+      cb15 = document.getElementsByClassName("chess-board-15")[0];
+      console.log(cb15);
+
+      cb16 = document.getElementsByClassName("chess-board-16")[0];
+      console.log(cb16);
+
+      cb17 = document.getElementsByClassName("chess-board-17")[0];
+      console.log(cb17);
+
+      cb18 = document.getElementsByClassName("chess-board-18")[0];
+      console.log(cb18);
+
+      cb19 = document.getElementsByClassName("chess-board-19")[0];
+      console.log(cb19);
+
+      cb20 = document.getElementsByClassName("chess-board-20")[0];
+      console.log(cb20);
+
+      cb21 = document.getElementsByClassName("chess-board-21")[0];
+      console.log(cb21);
+
+      cb22 = document.getElementsByClassName("chess-board-22")[0];
+      console.log(cb22);
+
+      cb23 = document.getElementsByClassName("chess-board-23")[0];
+      console.log(cb23);
+
+      cb24 = document.getElementsByClassName("chess-board-24")[0];
+      console.log(cb24);
+
+      cb25 = document.getElementsByClassName("chess-board-25")[0];
+      console.log(cb25);
+
+      cb26 = document.getElementsByClassName("chess-board-26")[0];
+      console.log(cb26);
+      cb27 = document.getElementsByClassName("chess-board-27")[0];
+      console.log(cb27);
+      cb28 = document.getElementsByClassName("chess-board-28")[0];
+      console.log(cb28);
+      cb29 = document.getElementsByClassName("chess-board-29")[0];
+      console.log(cb29);
+      cb30 = document.getElementsByClassName("chess-board-30")[0];
+      console.log(cb30);
+      cb31 = document.getElementsByClassName("chess-board-31")[0];
+      console.log(cb31);
+      cb32 = document.getElementsByClassName("chess-board-32")[0];
+      console.log(cb32);
+      cb33 = document.getElementsByClassName("chess-board-33")[0];
+      console.log(cb33);
+
+      tb = document.getElementsByTagName("tbody")[0];
+      console.log(tb);
+
+      tr = document.querySelectorAll("tr");
+      console.log(tr);
+
+      td = document.querySelectorAll("td");
+      console.log(td);
+
+      arook = document.getElementById("arook");
+      console.log(arook);
+
+      knight = document.getElementById("knight");
+      console.log(knight);
+
+      bishop = document.getElementById("bishop");
+      console.log(bishop);
+
+      king = document.getElementById("king");
+      console.log(king);
+
+      queen = document.getElementById("queen");
+      console.log(queen);
+
+      bishop2 = document.getElementById("bishop2");
+      console.log(bishop2);
+
+      knight2 = document.getElementById("knight2");
+      console.log(knight2);
+
+      arook2 = document.getElementById("arook2");
+      console.log(arook2);
+
+      ap1 = document.getElementById("ap1");
+      console.log(ap1);
+
+      ap2 = document.getElementById("ap2");
+      console.log(ap2);
+
+      ap3 = document.getElementById("ap3");
+      console.log(ap3);
+
+      ap4 = document.getElementById("ap4");
+      console.log(ap3);
+
+      ap5 = document.getElementById("ap5");
+      console.log(ap5);
+
+      ap6 = document.getElementById("ap6");
+      console.log(ap6);
+
+      ap7 = document.getElementById("ap7");
+      console.log(ap7);
+
+      ap8 = document.getElementById("ap8");
+      console.log(ap8);
+
+      brook = document.getElementById("brook");
+      console.log(brook);
+
+      bknight = document.getElementById("bknight");
+      console.log(bknight);
+
+      bbishop = document.getElementById("bbishop");
+      console.log(bbishop);
+
+      bking = document.getElementById("bking");
+      console.log(bking);
+
+      bqueen = document.getElementById("bqueen");
+      console.log(bqueen);
+
+      bbishop2 = document.getElementById("bbishop2");
+      console.log(bbishop2);
+
+      bknight2 = document.getElementById("bknight2");
+      console.log(bknight2);
+
+      brook2 = document.getElementById("brook2");
+      console.log(brook2);
+
+      bp1 = document.getElementById("bp1");
+      console.log(bp1);
+
+      bp2 = document.getElementById("bp2");
+      console.log(bp2);
+
+      bp3 = document.getElementById("bp3");
+      console.log(bp3);
+
+      bp4 = document.getElementById("bp4");
+      console.log(bp4);
+
+      bp5 = document.getElementById("bp5");
+      console.log(bp5);
+
+      bp6 = document.getElementById("bp6");
+      console.log(bp6);
+
+      bp7 = document.getElementById("bp7");
+      console.log(bp7);
+
+      bp8 = document.getElementById("bp8");
+      console.log(bp8);
+
+      f1 = document.getElementsByName("fname")[0];
+      f2 = document.getElementsByName("surname")[0];
+      b1 = document.getElementById("btn");
+
+      starting = document.getElementById("starting");
+
+      firstEle = document.createElement("div");
+      secondEle = document.createElement("div");
+      firstEle1 = document.createElement("div");
+      secondEle1 = document.createElement("div");
+
+      b1.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        firstEle.innerHTML = "";
+        secondEle.innerHTML = "";
+
+        firstEle1.innerHTML = `<span>${f1.value}</span>`;
+        secondEle1.innerHTML = `<span>${f2.value}</span>`;
+
+        firstEle.classList.add("player1");
+        secondEle.classList.add("player2");
+        firstEle1.classList.add("player11");
+        secondEle1.classList.add("player22");
+
+        document.body.append(firstEle);
+        document.body.append(secondEle);
+
+        document.body.append(firstEle1);
+        document.body.append(secondEle1);
+
+        ending = document.createElement("div");
+
+        ending.innerHTML = `<div class="controls2">
+      <form>
+        <span style="font-size:18px;  
+     ">Welcome ! , <b style="color:blue;">Mr.${f1.value}</b> & <b style="color:red;">Mr. ${f2.value}</b></span>
+
+        <a href="index.html"><button class="button-44" role="button" id="btn2">Stop</button></a>
+      </form>
+
+
+    </div>
+
+`;
+
+        document.body.append(ending);
+        starting.style.cssText = `display:none;`;
+      });
+    </script>
+
+    <script src="arook.js"></script>
+    <script src="knight.js"></script>
+    <script src="bishop.js"></script>
+    <script src="king.js"></script>
+    <script src="queen.js"></script>
+    <script src="bishop2.js"></script>
+    <script src="knight2.js"></script>
+    <script src="arook2.js"></script>
+    <script src="ap1.js"></script>
+    <script src="ap2.js"></script>
+    <script src="ap3.js"></script>
+    <script src="ap4.js"></script>
+    <script src="ap5.js"></script>
+    <script src="ap6.js"></script>
+    <script src="ap7.js"></script>
+    <script src="ap8.js"></script>
+    <script src="brook.js"></script>
+    <script src="bknight.js"></script>
+    <script src="bbishop.js"></script>
+    <script src="bking.js"></script>
+    <script src="bqueen.js"></script>
+    <script src="bbishop2.js"></script>
+    <script src="bknight2.js"></script>
+    <script src="brook2.js"></script>
+    <script src="bp1.js"></script>
+    <script src="bp2.js"></script>
+    <script src="bp3.js"></script>
+    <script src="bp4.js"></script>
+    <script src="bp5.js"></script>
+    <script src="bp6.js"></script>
+    <script src="bp7.js"></script>
+    <script src="bp8.js"></script>
+  </body>
+</html>

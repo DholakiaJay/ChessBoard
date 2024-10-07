@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form>
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="fname" value=""><br>
+    <label for="surname">Surname:</label><br>
+    <input type="text" id="surname" name="surname" value=""><br><br>
+    <button id="btn">Submit</button>
+  </form> 
+
+  <script>
+
+    f1 =  document.getElementsByName('fname')[0];
+    f2 =  document.getElementsByName('surname')[0];
+    b1 =  document.getElementById('btn');
+    
+    firstEle = document.createElement('div');
+    secondEle = document.createElement('div');
+
+    b1.addEventListener('click',(e)=>
+    {
+      e.preventDefault();
+
+      firstEle.innerHTML = `<span>${f1.value}</span>`;
+      secondEle.innerHTML = `<span>${f2.value}</span>`;
+      firstEle.style.cssText = `fontsize:36px`;
+      secondEle.style.cssText = `fontsize:36px`;
+
+      document.body.append(firstEle);
+      document.body.append(secondEle);
+
+    });
+
+
+
+  </script>
+  
+  
+</body>
+</html>
